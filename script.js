@@ -35,7 +35,26 @@ function getPlayerChoice() {
     return playerSelectionCorrected;
 }
 
-
-// let computerSelection = getComputerChoice();
-
-
+function game() {
+    let playerScore =0;
+    let computerScore =0;
+    for (let i = 0; i < 5; i++) {
+        if (i>0) {
+            console.log("Player: " + playerScore.toString());
+            console.log("Computer: " + computerScore.toString());
+        }
+        let result = fight(getPlayerChoice(),getComputerChoice());
+        if (result.includes("Win")) {
+            playerScore += 1;
+            console.log(result);
+        } else if (result.includes("Lose")) {
+            computerScore += 1;
+            console.log(result);
+        } else {
+            console.log(result);
+        }
+    }
+    console.log("Final Scores!");
+    console.log("Player: " + playerScore.toString());
+    console.log("Computer: " + computerScore.toString());
+}
