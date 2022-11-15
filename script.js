@@ -15,9 +15,9 @@ function fight(a,b) {
     if (a == b) {
         playerOutcome = "Draw! Both chose " + a + ".";
     } else if ((a == "Rock" && b =="Scissors") || (a == "Scissors" && b =="Paper") || (a == "Paper" && b =="Rock") )  {
-        playerOutcome = "You Win! " + a + " beats " + b + ".";
+        playerOutcome = "You Win! " + a + "(You) beats " + b + "(Computer).";
     } else {
-        playerOutcome = "You Lose! " + b + " beats " + a + ".";
+        playerOutcome = "You Lose! " + b + "(Computer) beats " + a + "(You).";
     }
 
     return playerOutcome;
@@ -43,6 +43,7 @@ function game() {
             console.log("Player: " + playerScore.toString());
             console.log("Computer: " + computerScore.toString());
         }
+        console.log("");
         let result = fight(getPlayerChoice(),getComputerChoice());
         if (result.includes("Win")) {
             playerScore += 1;
@@ -57,4 +58,11 @@ function game() {
     console.log("Final Scores!");
     console.log("Player: " + playerScore.toString());
     console.log("Computer: " + computerScore.toString());
+    if (playerScore > computerScore) {
+        console.log("The winner is You!");
+    } else if (computerScore > playerScore) {
+        console.log("The winner is Computer!");
+    } else {
+        console.log("The game is a Draw!")
+    }
 }
