@@ -23,15 +23,18 @@ function fight(a,b) {
     return playerOutcome;
 }
 
-// let playerSelection = prompt("Rock, Paper, Scissors?");
-// while (playerSelection != "Rock" && playerSelection != "Paper" && playerSelection != "Scissors" ) {
-//     playerSelection = prompt("Rock, Paper, Scissors?");
-        // if  (typeof playerSelection == "string") {
-        //     playerSelection= playerSelection.slice(0,1).toUpperCase() + playerSelection.slice(1).toLowerCase();
-        // }
-// }
+function getPlayerChoice() {
+    let playerSelection;
+    let playerSelectionCorrected;
+    while (playerSelectionCorrected != "Rock" && playerSelectionCorrected != "Paper" && playerSelectionCorrected != "Scissors" ) {
+        playerSelection = prompt("Rock, Paper, Scissors?");
+        if  (typeof playerSelection == "string") {
+            playerSelectionCorrected= playerSelection.slice(0,1).toUpperCase() + playerSelection.slice(1).toLowerCase();
+        }
+    }
+    return playerSelectionCorrected;
+}
 
-// let playerSelectionCorrected = playerSelection.slice(0,1).toUpperCase() + playerSelection.slice(1).toLowerCase();
 
 // let computerSelection = getComputerChoice();
 
