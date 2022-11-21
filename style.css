@@ -14,7 +14,7 @@ div.banner {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: top center;
-    height: 500px;
+    height: 350px;
     width: 1500px;
     margin: 0;
 }
@@ -81,6 +81,13 @@ div.container2 {
     width: 1500px;
     height: 126px;
     padding-top: 30px;
+}
+
+.container2 img{
+    width: 120px;
+    height: 120px;
+    border-radius: 20px;
+    border: 3px solid yellow;
 }
 
 div.container3 {

@@ -35,34 +35,60 @@ function getPlayerChoice() {
     return playerSelectionCorrected;
 }
 
-function game() {
-    let playerScore =0;
-    let computerScore =0;
-    for (let i = 0; i < 5; i++) {
-        if (i>0) {
-            console.log("Player: " + playerScore.toString());
-            console.log("Computer: " + computerScore.toString());
-        }
-        console.log("");
-        let result = fight(getPlayerChoice(),getComputerChoice());
-        if (result.includes("Win")) {
-            playerScore += 1;
-            console.log(result);
-        } else if (result.includes("Lose")) {
-            computerScore += 1;
-            console.log(result);
-        } else {
-            console.log(result);
-        }
-    }
-    console.log("Final Scores!");
-    console.log("Player: " + playerScore.toString());
-    console.log("Computer: " + computerScore.toString());
-    if (playerScore > computerScore) {
-        console.log("The winner is You!");
-    } else if (computerScore > playerScore) {
-        console.log("The winner is Computer!");
-    } else {
-        console.log("The game is a Draw!")
+function startRoll() {
+    return;
+}
+
+function playerHasSelected (e) {
+    console.log(e);
+    console.log(e.target.className);
+    while (!buttonState) {
+    const playerChoicediv= document.querySelector('.playerChoice');
+    const clone = e.target.cloneNode(false);
+    playerChoicediv?.appendChild(clone);
+    startRoll();
+    disallowButtons();
     }
 }
+
+function disallowButtons() {
+    buttonState = true;
+    const status = document.querySelector('.status');
+    status.textContent= 'Waiting for results..';
+}
+
+let buttonState = false;
+const selector = document.querySelectorAll('.selector');
+selector.forEach(element => element.addEventListener('click',playerHasSelected));
+
+// function game() {
+//     let playerScore =0;
+//     let computerScore =0;
+//     for (let i = 0; i < 5; i++) {
+//         if (i>0) {
+//             console.log("Player: " + playerScore.toString());
+//             console.log("Computer: " + computerScore.toString());
+//         }
+//         console.log("");
+//         let result = fight(getPlayerChoice(),getComputerChoice());
+//         if (result.includes("Win")) {
+//             playerScore += 1;
+//             console.log(result);
+//         } else if (result.includes("Lose")) {
+//             computerScore += 1;
+//             console.log(result);
+//         } else {
+//             console.log(result);
+//         }
+//     }
+//     console.log("Final Scores!");
+//     console.log("Player: " + playerScore.toString());
+//     console.log("Computer: " + computerScore.toString());
+//     if (playerScore > computerScore) {
+//         console.log("The winner is You!");
+//     } else if (computerScore > playerScore) {
+//         console.log("The winner is Computer!");
+//     } else {
+//         console.log("The game is a Draw!")
+//     }
+// }
