@@ -1,4 +1,10 @@
 // @ts-check
+
+let rollCount=0;
+const li1 = document.querySelector('.first');
+const li2 = document.querySelector('.second');
+const li3 = document.querySelector('.third');
+
 function getComputerChoice() {
     const choice = Math.floor(Math.random()*3);
     if (choice == 0) {
@@ -35,7 +41,47 @@ function getPlayerChoice() {
     return playerSelectionCorrected;
 }
 
+function swap() {
+    console.log (this.className);
+
+    if (rollCount>0 && (this.className == "second")) {
+    const li1 = document.querySelector('.first');
+    const li2 = document.querySelector('.second');
+    const li3 = document.querySelector('.third');
+    console.log(li1.className);
+    li1.className ="third";
+    console.log(li1.className);
+    li2.className ="first";
+    li3.className ="second"; 
+    rollCount--;
+    console.log(rollCount);
+    }
+
+}
+
 function startRoll() {
+    const li1 = document.querySelector('.first');
+    const li2 = document.querySelector('.second');
+    const li3 = document.querySelector('.third');
+    
+    const sieun1 = document.querySelector('.halfheart');
+    const clone1 = sieun1.cloneNode(false);
+    li1?.appendChild(clone1);
+
+    const sieun2 = document.querySelector('.wink');
+    const clone2 = sieun2.cloneNode(false);
+    li2?.appendChild(clone2);
+
+    const sieun3 = document.querySelector('.peace');
+    const clone3 = sieun3.cloneNode(false);
+    li3?.appendChild(clone3);
+
+    li1.className ="third";
+    li2.className ="first";
+    li3.className ="second"; 
+    
+    rollCount=10 + Math.floor(Math.random()*3);
+    
     return;
 }
 
@@ -61,34 +107,6 @@ let buttonState = false;
 const selector = document.querySelectorAll('.selector');
 selector.forEach(element => element.addEventListener('click',playerHasSelected));
 
-// function game() {
-//     let playerScore =0;
-//     let computerScore =0;
-//     for (let i = 0; i < 5; i++) {
-//         if (i>0) {
-//             console.log("Player: " + playerScore.toString());
-//             console.log("Computer: " + computerScore.toString());
-//         }
-//         console.log("");
-//         let result = fight(getPlayerChoice(),getComputerChoice());
-//         if (result.includes("Win")) {
-//             playerScore += 1;
-//             console.log(result);
-//         } else if (result.includes("Lose")) {
-//             computerScore += 1;
-//             console.log(result);
-//         } else {
-//             console.log(result);
-//         }
-//     }
-//     console.log("Final Scores!");
-//     console.log("Player: " + playerScore.toString());
-//     console.log("Computer: " + computerScore.toString());
-//     if (playerScore > computerScore) {
-//         console.log("The winner is You!");
-//     } else if (computerScore > playerScore) {
-//         console.log("The winner is Computer!");
-//     } else {
-//         console.log("The game is a Draw!")
-//     }
-// }
+const rollList = document.querySelectorAll('li');
+rollList.forEach(element => element.addEventListener('transitionend',swap));
+

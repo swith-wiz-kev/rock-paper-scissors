@@ -81,6 +81,70 @@ div.container2 {
     width: 1500px;
     height: 126px;
     padding-top: 30px;
+    gap: 10px;
+}
+
+.container2 .playerChoice, .computerChoice {
+    height: 126px;
+    margin: 0;
+    padding: 0;
+    width: 126px;
+    background-color: gray;
+    overflow: hidden;
+}
+
+.computerChoice ol {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-top: -131px;
+    position: relative;
+}
+
+.computerChoice li {
+    position: absolute;
+    height: 126px;
+    margin: 0;
+    padding: 0;
+    width: 126px;
+    background-color: blue;
+} 
+
+.first {
+    top: 0px;
+    transition: all .32s;
+}
+
+.second {
+    top: 131px;
+    transition: all .33s;
+}
+
+.third {
+    top: 262px;
+    transition: all .31s;
+    left: 126px;
+}
+
+.container2 .playerResult, .computerResult {
+    height: 50px;
+    margin: 0;
+    padding: 0;
+    width: 50px;
+    background-color: gray;
+}
+
+.container2 .spacer {
+    width: 30px;
+    height: 50px;
+    margin: 0;
+    padding: 0;
+    background-color: gray;
 }
 
 .container2 img{
