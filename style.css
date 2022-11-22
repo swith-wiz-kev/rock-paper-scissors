@@ -115,18 +115,15 @@ div.container2 {
 
 .first {
     top: 0px;
-    transition: all .32s;
 }
 
 .second {
     top: 131px;
-    transition: all .33s;
+
 }
 
 .third {
     top: 262px;
-    transition: all .31s;
-    left: 126px;
 }
 
 .container2 .playerResult, .computerResult {
@@ -148,6 +145,7 @@ div.container2 {
 
 .container2 div.draw{
     background-color: darkgoldenrod;
+    border-radius: 50px;
 }
 
 .container2 .spacer {
@@ -185,6 +183,6 @@ div.container3 {
     margin: 5px;
 }
 
-.computer.row.win {
-    border: 1px solid green;
+.container3 .row.win {
+    border: 2px solid green;
 }

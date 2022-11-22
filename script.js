@@ -3,9 +3,12 @@
 let rollCount=0;
 let playerScore =0;
 let computerScore =0;
+let buttonState = false;
+let timer1 = "first";
 
-function fight(a,b) {
-
+function fight(a) {
+    const playerChoicediv= document.querySelector('.playerChoice');
+    const b = playerChoicediv.firstChild.className
     if (a == b) {
         result(1);
     } else if ((a == "halfheart" && b =="wink") || 
@@ -60,6 +63,7 @@ function result(a) {
         default:
             break;
     }
+    allowButtons();
 }
 
 function win () {
@@ -70,60 +74,81 @@ function lose () {
 
 }
 
-function swap() {
 
-
-    if (rollCount>0 && (this.className == "second")) {
-    const li1 = document.querySelector('.first');
-    const li2 = document.querySelector('.second');
-    const li3 = document.querySelector('.third');
-
-    li1.className ="third";
-
-    li2.className ="first";
-    li3.className ="second"; 
-    rollCount--;
-
-    } else if (rollCount==0 && (this.className == "second")) {
-        console.log(this.firstChild.className);
-        const playerChoicediv= document.querySelector('.playerChoice');
-        fight(playerChoicediv?.firstChild?.className,this.firstChild.className);
-
-    }
-
-}
 
 function startRoll() {
+    function initializeCard(liElement,pick) {
+        if (liElement.firstChild) {liElement?.removeChild(liElement.firstChild)};
+        const sieun = document.querySelector(pick);
+        const clone = sieun.cloneNode(false);
+        liElement?.appendChild(clone);
+    }
+    
+    function startMove(element1,element2,element3,timer) {
+        function moveall () {
+            if (rollCount <= 0 && chosenElement.offsetTop<=141 && chosenElement.offsetTop >=131 ) {
+                clearInterval(timer);
+                element1.style.top = '0px';
+                element2.style.top = '0px';
+                element3.style.top = '0px';
+                chosenElement.style.top = '131px';
+                fight(chosenElement.firstChild.className);
+            } else {
+                let pos = element3.offsetTop;
+                rollCount--;
+                pos = pos - 11;
+                const pos1 = ((pos-262)%393+393)%393;
+                const pos2 = ((pos-131)%393+393)%393;
+                const pos3 = (pos%393+393)%393;
+                element1.style.top = pos1 + 'px';
+                element2.style.top = pos2 + 'px';
+                element3.style.top = pos3 + 'px';
+                    }
+        }
+        element1.style.top = '0px';
+        element2.style.top = '131px';
+        element3.style.top = '262px';
+        clearInterval(timer);
+        timer = setInterval(moveall,20);
+    }
+
+    function getComputerChoice() {
+        const random =Math.floor(Math.random()*3)
+        switch (random) {
+            case 0:
+                chosenElement = li1;
+                break;
+            case 1:
+                chosenElement = li2;
+                break;
+            case 2:
+                chosenElement = li3;
+                break;
+            default:
+                break;
+        }
+    }
+
     const li1 = document.querySelector('.first');
     const li2 = document.querySelector('.second');
     const li3 = document.querySelector('.third');
-    if (li1.firstChild) {li1?.removeChild(li1.firstChild)};
-    if (li2.firstChild) {li2?.removeChild(li2.firstChild)};
-    if (li3.firstChild) {li3?.removeChild(li3.firstChild)};
-    const sieun1 = document.querySelector('.halfheart');
-    const clone1 = sieun1.cloneNode(false);
-    li1?.appendChild(clone1);
-
-    const sieun2 = document.querySelector('.wink');
-    const clone2 = sieun2.cloneNode(false);
-    li2?.appendChild(clone2);
-
-    const sieun3 = document.querySelector('.peace');
-    const clone3 = sieun3.cloneNode(false);
-    li3?.appendChild(clone3);
-
-    li1.className ="third";
-    li2.className ="first";
-    li3.className ="second"; 
-    
-    rollCount=10 + Math.floor(Math.random()*3);
-    
+    initializeCard(li1,'.halfheart');
+    initializeCard(li2,'.wink');
+    initializeCard(li3,'.peace');
+    let chosenElement = li1;
+    getComputerChoice();
+    rollCount=5*25; 
+    console.log(chosenElement);
+    startMove(li1,li2,li3,timer1);
     return;
 }
 
 function playerHasSelected (e) {
-    console.log(e);
-    console.log(e.target.className);
+    const playerResult = document.querySelector('.playerResult');
+    const computerResult = document.querySelector('.computerResult');
+    playerResult.className="playerResult";
+    computerResult.className="computerResult";
+
     while (!buttonState) {
     const playerChoicediv= document.querySelector('.playerChoice');
     if (playerChoicediv.firstChild) {
@@ -142,10 +167,13 @@ function disallowButtons() {
     status.textContent= 'Waiting for results..';
 }
 
-let buttonState = false;
+function allowButtons() {
+    buttonState = false;
+    const status = document.querySelector('.status');
+    status.textContent= 'Choose your Sieun..';
+}
+
 const selector = document.querySelectorAll('.selector');
 selector.forEach(element => element.addEventListener('click',playerHasSelected));
 
-const rollList = document.querySelectorAll('li');
-rollList.forEach(element => element.addEventListener('transitionend',swap));
 
