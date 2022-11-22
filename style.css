@@ -89,7 +89,6 @@ div.container2 {
     margin: 0;
     padding: 0;
     width: 126px;
-    background-color: gray;
     overflow: hidden;
 }
 
@@ -112,7 +111,6 @@ div.container2 {
     margin: 0;
     padding: 0;
     width: 126px;
-    background-color: blue;
 } 
 
 .first {
@@ -136,7 +134,20 @@ div.container2 {
     margin: 0;
     padding: 0;
     width: 50px;
-    background-color: gray;
+}
+
+.container2 div.win{
+    background-color: green;
+    border-radius: 50px;
+}
+
+.container2 div.lose{
+    background-color: rgb(77, 3, 3);
+    border-radius: 50px;
+}
+
+.container2 div.draw{
+    background-color: darkgoldenrod;
 }
 
 .container2 .spacer {
@@ -144,7 +155,6 @@ div.container2 {
     height: 50px;
     margin: 0;
     padding: 0;
-    background-color: gray;
 }
 
 .container2 img{
@@ -173,4 +183,8 @@ div.container3 {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     width: 200px;
     margin: 5px;
+}
+
+.computer.row.win {
+    border: 1px solid green;
 }

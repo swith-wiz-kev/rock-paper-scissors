@@ -1,60 +1,94 @@
 // @ts-check
 
 let rollCount=0;
-const li1 = document.querySelector('.first');
-const li2 = document.querySelector('.second');
-const li3 = document.querySelector('.third');
-
-function getComputerChoice() {
-    const choice = Math.floor(Math.random()*3);
-    if (choice == 0) {
-        return "Rock";
-    } else if (choice == 1) {
-        return "Paper";
-    } else {
-        return "Scissors";
-    }   
-}
+let playerScore =0;
+let computerScore =0;
 
 function fight(a,b) {
-    let playerOutcome = "";
+
     if (a == b) {
-        playerOutcome = "Draw! Both chose " + a + ".";
-    } else if ((a == "Rock" && b =="Scissors") || (a == "Scissors" && b =="Paper") || (a == "Paper" && b =="Rock") )  {
-        playerOutcome = "You Win! " + a + "(You) beats " + b + "(Computer).";
+        result(1);
+    } else if ((a == "halfheart" && b =="wink") || 
+                (a == "wink" && b =="peace") || 
+                (a == "peace" && b =="halfheart") )  {
+                    result(2);
     } else {
-        playerOutcome = "You Lose! " + b + "(Computer) beats " + a + "(You).";
+        result(0);
     }
 
-    return playerOutcome;
+    return ;
 }
 
-function getPlayerChoice() {
-    let playerSelection;
-    let playerSelectionCorrected;
-    while (playerSelectionCorrected != "Rock" && playerSelectionCorrected != "Paper" && playerSelectionCorrected != "Scissors" ) {
-        playerSelection = prompt("Rock, Paper, Scissors?");
-        if  (typeof playerSelection == "string") {
-            playerSelectionCorrected= playerSelection.slice(0,1).toUpperCase() + playerSelection.slice(1).toLowerCase();
-        }
+function updateResult () {
+    const computerScoreElement = document.querySelector('.computerScore');
+    const playerScoreElement = document.querySelector('.playerScore');
+    const computerRow = document.querySelector('.computer.row');
+    const playerRow = document.querySelector('.player.row');
+    computerScoreElement.textContent = `${computerScore}`;
+    playerScoreElement.textContent = `${playerScore}`;
+    if (playerScore == 5) {
+        playerRow.className = "player row win";
+    } else if (computerScore==5) {
+        computerRow.className = "computer row win";
+    } else {
+        playerRow.className = "player row";
+        computerRow.className = "computer row";
     }
-    return playerSelectionCorrected;
+}
+
+function result(a) {
+    // a: 0=lose, 1= draw, 2=win
+    const playerResult = document.querySelector('.playerResult');
+    const computerResult = document.querySelector('.computerResult');
+    switch (a) {
+        case 0:
+            playerResult.className="playerResult lose";
+            computerResult.className="computerResult win";
+            computerScore++;
+            updateResult();
+            break;
+        case 1:
+            playerResult.className="playerResult draw";
+            computerResult.className="computerResult draw";
+            break;
+        case 2:
+            playerResult.className="playerResult win";
+            computerResult.className="computerResult lose";
+            playerScore++;
+            updateResult();
+            break;
+        default:
+            break;
+    }
+}
+
+function win () {
+
+}
+
+function lose () {
+
 }
 
 function swap() {
-    console.log (this.className);
+
 
     if (rollCount>0 && (this.className == "second")) {
     const li1 = document.querySelector('.first');
     const li2 = document.querySelector('.second');
     const li3 = document.querySelector('.third');
-    console.log(li1.className);
+
     li1.className ="third";
-    console.log(li1.className);
+
     li2.className ="first";
     li3.className ="second"; 
     rollCount--;
-    console.log(rollCount);
+
+    } else if (rollCount==0 && (this.className == "second")) {
+        console.log(this.firstChild.className);
+        const playerChoicediv= document.querySelector('.playerChoice');
+        fight(playerChoicediv?.firstChild?.className,this.firstChild.className);
+
     }
 
 }
@@ -63,7 +97,9 @@ function startRoll() {
     const li1 = document.querySelector('.first');
     const li2 = document.querySelector('.second');
     const li3 = document.querySelector('.third');
-    
+    if (li1.firstChild) {li1?.removeChild(li1.firstChild)};
+    if (li2.firstChild) {li2?.removeChild(li2.firstChild)};
+    if (li3.firstChild) {li3?.removeChild(li3.firstChild)};
     const sieun1 = document.querySelector('.halfheart');
     const clone1 = sieun1.cloneNode(false);
     li1?.appendChild(clone1);
@@ -90,6 +126,9 @@ function playerHasSelected (e) {
     console.log(e.target.className);
     while (!buttonState) {
     const playerChoicediv= document.querySelector('.playerChoice');
+    if (playerChoicediv.firstChild) {
+        playerChoicediv.removeChild(playerChoicediv.firstChild);
+    }
     const clone = e.target.cloneNode(false);
     playerChoicediv?.appendChild(clone);
     startRoll();
