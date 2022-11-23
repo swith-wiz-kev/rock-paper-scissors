@@ -5,16 +5,17 @@ let playerScore =0;
 let computerScore =0;
 let buttonState = false;
 let timer1 = "first";
-
+let reset = false;
 function fight(a) {
     const playerChoicediv= document.querySelector('.playerChoice');
     const b = playerChoicediv.firstChild.className
     if (a == b) {
         result(1);
-    } else if ((a == "halfheart" && b =="wink") || 
-                (a == "wink" && b =="peace") || 
-                (a == "peace" && b =="halfheart") )  {
-                    result(2);
+    } else if 
+        ((a == "halfheart" && b =="wink") || 
+        (a == "wink" && b =="peace") || 
+        (a == "peace" && b =="halfheart") )  {
+        result(2);
     } else {
         result(0);
     }
@@ -31,8 +32,10 @@ function updateResult () {
     playerScoreElement.textContent = `${playerScore}`;
     if (playerScore == 5) {
         playerRow.className = "player row win";
+        reset=true;
     } else if (computerScore==5) {
         computerRow.className = "computer row win";
+        reset=true;
     } else {
         playerRow.className = "player row";
         computerRow.className = "computer row";
@@ -66,7 +69,7 @@ function result(a) {
     allowButtons();
 }
 
-function win () {
+function gameReset () {
 
 }
 
@@ -148,6 +151,13 @@ function playerHasSelected (e) {
     const computerResult = document.querySelector('.computerResult');
     playerResult.className="playerResult";
     computerResult.className="computerResult";
+
+    if (reset) {
+        computerScore = 0;
+        playerScore = 0;
+        updateResult();
+        reset = false;
+    }
 
     while (!buttonState) {
     const playerChoicediv= document.querySelector('.playerChoice');
